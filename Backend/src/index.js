@@ -7,7 +7,8 @@ import connection from "./config/db.js";
 
 const app = express();
 
-connection();
+await connection();
+
 
 
 app.listen(process.env.PORT,()=>{

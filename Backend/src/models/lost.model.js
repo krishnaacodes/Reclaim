@@ -29,7 +29,11 @@ const lostitemSchema = new mongoose.Schema({
         required:false,
         default:-1
     },
-    
+    status: {
+    type: String,
+    enum: ["lost", "found", "recovered"],
+    default: "lost"
+   },
     date:{
         type:Date,
         default:Date.now,
@@ -48,6 +52,6 @@ const lostitemSchema = new mongoose.Schema({
     {timestamps:true}
 )
 
-const lostItem = mongoose.model("lostItem",lostitemSchema);
+const LostItem = mongoose.model("LostItem",lostitemSchema);
 
-export default lostItem;
+export default LostItem;

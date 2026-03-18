@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 
 const lostitemSchema = new mongoose.Schema({
@@ -11,16 +11,28 @@ const lostitemSchema = new mongoose.Schema({
         required:true
     },
     category:{
-
-        
-
+        type:String,
+        required:true,
+        enum: ["electronics", "stationary", "shoe_clothing", "others"] 
     },
     location:{
-        tyep:String,
+        type:String,
         required:true
     },
+    latitude:{
+        type:Number,
+        required:false,
+        default:-1
+    },
+    longitude:{
+        type:Number,
+        required:false,
+        default:-1
+    },
+    
     date:{
         type:Date,
+        default:Date.now,
         required:true
     },
     image:{
@@ -28,7 +40,7 @@ const lostitemSchema = new mongoose.Schema({
         required:true
     },
     user:{
-        type:mongoose.Schem.Type.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true
     },
@@ -36,6 +48,6 @@ const lostitemSchema = new mongoose.Schema({
     {timestamps:true}
 )
 
-const lostitem = mongoose.model("lostitem",lostitemSchema);
+const lostItem = mongoose.model("lostItem",lostitemSchema);
 
-export default lostitem;
+export default lostItem;

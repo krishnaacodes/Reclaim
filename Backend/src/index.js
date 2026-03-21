@@ -10,13 +10,14 @@ const app = express();
 await connection();
 
 
-import userRouter from "user.route.js";
+import userRouter from "./routes/user.route.js";
 
 app.use("/api/v1/user",userRouter);
+console.log("hi");
 
 
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT ,()=>{
     console.log("hao");
 })
 

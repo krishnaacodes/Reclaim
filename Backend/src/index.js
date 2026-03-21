@@ -10,6 +10,11 @@ const app = express();
 await connection();
 
 
+import userRouter from "user.route.js";
+
+app.use("/api/v1/user",userRouter);
+
+
 
 app.listen(process.env.PORT,()=>{
     console.log("hao");

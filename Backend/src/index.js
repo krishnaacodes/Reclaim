@@ -13,7 +13,7 @@ await connection();
 import userRouter from "./routes/user.route.js";
 
 app.use("/api/v1/user",userRouter);
-console.log("hi");
+
 
 
 

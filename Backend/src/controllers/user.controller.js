@@ -2,7 +2,7 @@ import asyncHandler from "../utils/asynchandler.js";
 import User from "../models/user.model.js";
 
 
-const registerUser = asyncHandler(async (req,res)=>{
+const registerUser = async (req,res)=>{
 
     const {username,email,fullname,avatar,password} = req.body;
     if(!username || !email || !fullname || !password){
@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req,res)=>{
         "message":"hii",
         user:createdUser
     })
-});
+};
 
 
 export default registerUser;

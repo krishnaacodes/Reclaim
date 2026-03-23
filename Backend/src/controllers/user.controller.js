@@ -17,7 +17,7 @@ const registerUser = async (req,res)=>{
 
    if(userExists){
      return  res.status(400).send({
-        message:"user already exists"
+        message:"user already exists with this username or email"
     })
    }
 

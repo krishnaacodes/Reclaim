@@ -3,6 +3,7 @@ import 'dotenv/config'
 
 
 import express from "express";
+import cookieParser from "cookie-parser";
 import connection from "./config/db.js";
 
 const app = express();

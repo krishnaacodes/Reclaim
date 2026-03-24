@@ -40,9 +40,15 @@ const registerUser = async (req,res)=>{
     })
 };
 
-const loginUser = asyncHandler(async (req,res)=>{
 
+
+ // logic for login user
+
+
+const loginUser = asyncHandler(async (req,res)=>{
+    
     const {email,password} = req.body;
+   
 
     if(!email || !password){
         res.status(400).send("email and password is required");
@@ -50,7 +56,7 @@ const loginUser = asyncHandler(async (req,res)=>{
     }
 
     const user = await User.findOne({
-        $or:[{email},{username}]
+        $or:[{email}]
     })
 
     if(!user){
@@ -61,17 +67,32 @@ const loginUser = asyncHandler(async (req,res)=>{
     const ispasswordcorrect = await user.ispasswordcorrect(password);
 
     if(!ispasswordcorrect){
-        res.status(400).send("password is incorret");
+        res.status(401).send("password is incorret");
         return;
+    };
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+     user.refreshtoken = refreshToken;
+
+    await user.save();
+
+  
+
+    const options = {
+        httpOnly: true,
+        secure: true
     }
 
-
-
-
-
-
+    res.status(200)
+    .cookie("accesstoke",accessToken,options)
+    .cookie("refresttoken",refreshToken,options)
+    .json({
+        message:"logged in"
+    })
 });
 
 
-export { registerUser};
+export { registerUser,loginUser};
  

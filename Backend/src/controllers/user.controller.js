@@ -42,6 +42,34 @@ const registerUser = async (req,res)=>{
 
 const loginUser = asyncHandler(async (req,res)=>{
 
+    const {email,password} = req.body;
+
+    if(!email || !password){
+        res.status(400).send("email and password is required");
+        return;
+    }
+
+    const user = await User.findOne({
+        $or:[{email},{username}]
+    })
+
+    if(!user){
+        res.status(400).send("no user exists with this username or email");
+        return;
+    };
+
+    const ispasswordcorrect = await user.ispasswordcorrect(password);
+
+    if(!ispasswordcorrect){
+        res.status(400).send("password is incorret");
+        return;
+    }
+
+
+
+
+
+
 });
 
 

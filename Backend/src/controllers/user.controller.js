@@ -46,6 +46,8 @@ const registerUser = async (req,res)=>{
 
 
 const loginUser = asyncHandler(async (req,res)=>{
+
+    console.log("req" , req);
     
     const {email,password} = req.body;
    
@@ -78,6 +80,8 @@ const loginUser = asyncHandler(async (req,res)=>{
 
     await user.save();
 
+   const  loggedUser = await User.findById(user._id).select("-password -refreshtoken");
+
   
 
     const options = {
@@ -86,13 +90,21 @@ const loginUser = asyncHandler(async (req,res)=>{
     }
 
     res.status(200)
-    .cookie("accesstoke",accessToken,options)
-    .cookie("refresttoken",refreshToken,options)
+    .cookie("accessToken",accessToken,options)
+    .cookie("refreshToken",refreshToken,options)
     .json({
-        message:"logged in"
+        message:"logged in",
+        "user": loggedUser,
+        "refrestToken":refreshToken,
+        "accessToken":accessToken
     })
 });
 
 
-export { registerUser,loginUser};
+const logoutUser = asyncHandler(async(req,res)=>{
+
+})
+
+
+export { registerUser,loginUser,logoutUser};
  

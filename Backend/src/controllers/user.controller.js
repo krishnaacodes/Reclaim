@@ -1,5 +1,39 @@
 import asyncHandler from "../utils/asynchandler.js";
 import User from "../models/user.model.js";
+import jwt from "jsonwebtoken"
+
+
+  const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+const generatetoken = async (user_id) => {
+    try{
+
+        const user = await User.findById(user_id);
+        if(!user){
+            return NULL;
+        }
+        const accessToken = await user.generateAccessToken();
+        const refreshToken = await user.generateRefreshToken();
+
+        return {accessToken,refreshToken};
+
+    }catch(error){
+          throw error;
+          return ;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 const registerUser = async (req,res)=>{
@@ -47,7 +81,7 @@ const registerUser = async (req,res)=>{
 
 const loginUser = asyncHandler(async (req,res)=>{
 
-    console.log("req" , req);
+    
     
     const {email,password} = req.body;
    
@@ -73,8 +107,8 @@ const loginUser = asyncHandler(async (req,res)=>{
         return;
     };
 
-    const accessToken = await user.generateAccessToken();
-    const refreshToken = await user.generateRefreshToken();
+ 
+    const {accessToken , refreshToken} = await generatetoken(user._id);
 
      user.refreshtoken = refreshToken;
 
@@ -84,10 +118,7 @@ const loginUser = asyncHandler(async (req,res)=>{
 
   
 
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
+  
 
     res.status(200)
     .cookie("accessToken",accessToken,options)
@@ -100,8 +131,8 @@ const loginUser = asyncHandler(async (req,res)=>{
     })
 });
 
-
-const logoutUser = asyncHandler(async(req,res)=>{
+// logic for logout user
+const logoutUser = asyncHandler(async (req,res)=>{
     
     const userinfo = await User.findByIdAndUpdate(
         req.user._id,
@@ -112,10 +143,7 @@ const logoutUser = asyncHandler(async(req,res)=>{
         },
         {returnDocument:"after"});
 
-        const options = {
-            secure:true,
-            httpOnly:true
-        };
+   
 
 
         res.status(200)
@@ -127,6 +155,47 @@ const logoutUser = asyncHandler(async(req,res)=>{
 })
 
 
+const updateAccessToken = asyncHandler(async (req,res)=>{
+    const old_refreshToken = req.cookies.refreshToken;
+    if(!old_refreshToken){
+        throw "require refresh token";
+        return;
+    }
 
-export { registerUser,loginUser,logoutUser};
+   const user_id =  await jwt.verify(old_refreshToken,process.env.REFRESH_TOKEN_SECRET);
+
+   const user = await User.findById(user_id);
+
+   if(!user){
+    res.status(402).json({message : "Invalid refresh token"});
+    return;
+   }
+
+   if(old_refreshToken !== user.refreshtoken){
+    res.status(402).json({
+        "message":"Invalid refresh token"
+    })
+    return;
+   }
+
+   const {accessToken , refreshToken} = await generatetoken(user._id);
+   
+
+   user.refreshtoken = refreshToken;
+   await user.save();
+
+   res.status(200)
+   .cookie("accessToken",accessToken,options)
+   .cookie("refreshToken",refreshToken,options)
+   .json({
+    message:"new token generated",
+    accesstoke : accessToken,
+    refreshtoken : refreshToken
+   })
+
+})
+
+
+
+export { registerUser,loginUser,logoutUser,updateAccessToken};
  

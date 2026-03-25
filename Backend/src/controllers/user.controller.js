@@ -162,9 +162,9 @@ const updateAccessToken = asyncHandler(async (req,res)=>{
         return;
     }
 
-   const user_id =  await jwt.verify(old_refreshToken,process.env.REFRESH_TOKEN_SECRET);
+   const decoded =  await jwt.verify(old_refreshToken,process.env.REFRESH_TOKEN_SECRET);
 
-   const user = await User.findById(user_id);
+   const user = await User.findById(decoded._id);
 
    if(!user){
     res.status(402).json({message : "Invalid refresh token"});
@@ -192,7 +192,6 @@ const updateAccessToken = asyncHandler(async (req,res)=>{
     accesstoke : accessToken,
     refreshtoken : refreshToken
    })
-
 })
 
 

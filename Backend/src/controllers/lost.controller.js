@@ -7,7 +7,7 @@ const createLostItem = asyncHandler(async (req,res)=>{
     const {title,description,category,location,image} = req.body;
 
     if(!title || !description || !category || !location || !image ){
-        res.status(401).send("all fields are required");
+        res.status(400).send("all fields are required");
         return;
     }
 
@@ -21,11 +21,11 @@ const createLostItem = asyncHandler(async (req,res)=>{
         user : req.user._id
     })
 
-    const createdLostItem = await LostItem.findById(createitem._id);
+    
 
 
     res.status(200).json({
-        createdLostItem
+        createitem
     })
 })
 

@@ -61,6 +61,7 @@ const registerUser = async (req,res)=>{
     fullname,
     avatar,
     password,
+    
    });
 
 

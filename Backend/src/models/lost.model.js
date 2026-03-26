@@ -31,13 +31,13 @@ const lostitemSchema = new mongoose.Schema({
     },
     status: {
     type: String,
-    enum: ["lost", "found", "recovered"],
+    enum: ["lost", "recovered"],
     default: "lost"
    },
     date:{
         type:Date,
         default:Date.now,
-        required:true
+        
     },
     image:{
         type:String, // cloudnary

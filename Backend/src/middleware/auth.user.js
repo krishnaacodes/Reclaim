@@ -14,7 +14,7 @@ const authenticateuser = asyncHandler(async (req , res, next)=>{
 
     const decodedtoken = await jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET);
 
-   const user = await User.findById(decodedtoken._id).select("-password");
+   const user = await User.findById(decodedtoken._id).select("-password -refreshToken");
 
    if(!user){
     res.status(401).send("invalid access token");

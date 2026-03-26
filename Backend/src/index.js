@@ -15,8 +15,10 @@ await connection();
 
 
 import userRouter from "./routes/user.route.js";
+import lostRouter from "./routes/lost.route.js";
 
 app.use("/api/v1/user",userRouter);
+app.use("/api/v1/lost",lostRouter);
 
 
 

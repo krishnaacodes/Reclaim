@@ -32,6 +32,10 @@ const createLostItem = asyncHandler(async (req,res)=>{
 const setAsRecovered = asyncHandler(async (req,res)=>{
     const id = req.params.id;
 
+    if(!id){
+        res.staus(400).send("Invalid id");
+    }
+
 
     const lostItem = await LostItem.findById(id);
     if(!lostItem){
@@ -54,7 +58,7 @@ const setAsRecovered = asyncHandler(async (req,res)=>{
 
     res.status(200).send("mark as recovered");
 
-})
+});
 
 
 

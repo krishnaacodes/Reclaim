@@ -61,10 +61,30 @@ const setAsRecovered = asyncHandler(async (req,res)=>{
 });
 
 
+const getAllLostItemOfUser = asyncHandler(async (req,res)=>{
+    
+    
+   
+
+    const allLostItem = await LostItem.find({user:req.user?._id});
+
+    if (!allLostItem || allLostItem.length === 0) {
+    res.status(404).send("No lost items found for this user");
+    return;
+   }
+
+    res.status(200).json({
+        allLostItem
+    })
+});
 
 
 
-export {createLostItem,setAsRecovered};
+
+
+
+
+export {createLostItem,setAsRecovered,getAllLostItemOfUser};
 
 
 

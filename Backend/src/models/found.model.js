@@ -12,10 +12,14 @@ const founditemSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
-    verificationDetail: {
+    verificationQuestion: {
     type: String, // e.g., "The lock screen wallpaper is a picture of a golden retriever"
     required: false
-},
+    },
+    verificationAnswer : {
+        type:String,
+        required:false
+    },
     category:{
         type:String,
         required:true,

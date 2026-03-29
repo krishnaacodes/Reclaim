@@ -55,7 +55,49 @@ const getAllFoundItem = asyncHandler(async (req,res)=>{
 });
 
 
-export {getAllFoundItem,createFoundItem};
+
+const setAsRecovered = asyncHandler(async (req,res)=>{
+    const id = req.params.id;
+
+    if(!id){
+        res.staus(400).send("Invalid id");
+    }
+
+
+    const foundItem = await FoundItem.findById(id);
+
+    if(!foundItem){
+      res.status(404).send("Item not found");     
+      return;
+    }
+    const userId = req.user?._id;
+    const foundItemUserID = foundItem.user;
+
+    if(!foundItemUserID.equals(userId)){
+         res.status(403).send("You do not have permission to update this item");
+         return;
+    }
+
+
+
+    foundItem.status = "recovered";
+    await foundItem.save();
+
+
+    res.status(200).json(
+        {
+            message : "mark as recovered",
+            foundItem
+
+    });
+
+});
+
+
+
+
+
+export {getAllFoundItem,createFoundItem,setAsRecovered};
 
 
 

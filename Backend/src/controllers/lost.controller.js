@@ -90,7 +90,33 @@ const getAllLostItem = asyncHandler(async (req,res)=>{
     res.status(200).json({
         alllostitem
     });
-})
+});
+
+
+const deleteLostItem = asyncHandler(async (req,res)=>{
+
+    const id = req.params.id;
+    if(!id){
+        res.status(401).send("can not fetch id");
+        return;
+    }
+
+    const item = await LostItem.findById(id);
+    if(!item){
+        res.status(401).send("no item exists with this id");
+        return;
+    }
+
+    if(!item.user.equals(req.user?._id)){
+      res.status(401).send("you do not have permission to delete this item");
+      return;
+    }
+
+    await LostItem.findByIdAndDelete(id);
+
+    res.status(200).send("Item deleted successfully");
+
+});
 
 
 
@@ -98,7 +124,7 @@ const getAllLostItem = asyncHandler(async (req,res)=>{
 
 
 
-export {createLostItem,setAsRecovered,getAllLostItemOfUser,getAllLostItem};
+export {createLostItem,setAsRecovered,getAllLostItemOfUser,getAllLostItem,deleteLostItem};
 
 
 

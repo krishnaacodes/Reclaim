@@ -16,9 +16,11 @@ await connection();
 
 import userRouter from "./routes/user.route.js";
 import lostRouter from "./routes/lost.route.js";
+import foundRouter from "./routes/found.route.js";
 
 app.use("/api/v1/user",userRouter);
 app.use("/api/v1/lost",lostRouter);
+app.use("/api/v1/found",foundRouter);
 
 
 

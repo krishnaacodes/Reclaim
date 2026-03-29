@@ -1,0 +1,13 @@
+import express from "express";
+import { authenticateuser } from "../middleware/auth.user.js";
+import {getAllFoundItem,createFoundItem} from "../controllers/found.controller.js";
+
+const Router = express.Router();
+
+
+
+Router.get("/getAllFoundItem",authenticateuser,getAllFoundItem);
+Router.post("/createFoundItem",authenticateuser,createFoundItem);
+
+
+export default Router;

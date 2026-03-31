@@ -66,10 +66,10 @@ const getAllLostItemOfUser = asyncHandler(async (req,res)=>{
     
    
 
-    const allLostItem = await LostItem.find({user:req.user?._id});
+    const allLostItem = await LostItem.find({user:req.user?._id,});
 
     if (!allLostItem || allLostItem.length === 0) {
-    res.status(404).send("No lost items found for this user");
+    res.status(404).send("No Lost items found for this user");
     return;
    }
 

@@ -74,7 +74,7 @@ const setAsRecovered = asyncHandler(async (req,res)=>{
     const foundItemUserID = foundItem.user;
 
     if(!foundItemUserID.equals(userId)){
-         res.status(403).send("You do not have permission to update this item");
+         res.status(200).send("You do not have permission to update this item");
          return;
     }
 
@@ -93,11 +93,28 @@ const setAsRecovered = asyncHandler(async (req,res)=>{
 
 });
 
+const getAllFoundItemOfUser = asyncHandler(async (req,res)=>{
+    
+    
+   
+
+    const allFoundItem = await FoundItem.find({user:req.user?._id});
+
+    if (!allFoundItem || allFoundItem.length === 0) {
+    res.status(200).send("No Found items found for this user");
+    return;
+   }
+
+    res.status(200).json({
+        allFoundItem
+    })
+});
 
 
 
 
-export {getAllFoundItem,createFoundItem,setAsRecovered};
+
+export {getAllFoundItem,createFoundItem,setAsRecovered,getAllFoundItemOfUser};
 
 
 

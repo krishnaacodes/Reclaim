@@ -6,7 +6,7 @@ function Navbar(){
   
     return (
     
-    <nav className="bg-[#0F0E0D] ">
+    <nav className="bg-[#0F0E0D]  sticky top-0 z-50">
         <div className = " h-16 flex flex-row justify-between px-6 items-center max-w-7xl mx-auto">
             <a href="#" className="text-xl font-bold text-white">
                 Reclaim<span className="text-orange-600">.</span>

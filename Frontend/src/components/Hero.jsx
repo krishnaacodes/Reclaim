@@ -5,7 +5,7 @@ function Hero(){
 
     return (
       <section className="bg-[#0F0E0D] min-h-screen ">
-        <div className="max-w-7xl mx-auto  px-6 pt-20">
+        <div className="max-w-7xl mx-auto  px-6 pt-30">
             <div>
                 <p className="max-w-lg font-medium text-orange-600 text-sm tracking-wide uppercase">— DAVV University.</p>
                 <p className="max-w-lg text-5xl font-bold text-white mt-6">Every lost thing <br></br>deserves to be 

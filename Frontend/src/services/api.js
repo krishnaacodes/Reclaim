@@ -3,14 +3,86 @@ const api = "http://localhost:3000/api/v1";
 
 
 
-export async function getAllFoundItems(){
- 
-     const response = await fetch(`${api}/found/getAllFoundItem`);
+export async function getAllFoundItems() {
 
-     const result = await response.json();
+    const response = await fetch(`${api}/found/getAllFoundItem`);
 
-     console.log(result);
+    const result = await response.json();
 
-     return result;
+    console.log(result);
+
+    return result;
+
+}
+
+
+
+export async function reportItem(title, description, category, status, location , image) {
+
+
+    let response = "";
+
+    if (status.toLowerCase() === "lost") {
+
+        response = await fetch(
+            `${api}/lost/createLostItem`,
+            {
+                method: "POST",
+
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(
+                    {
+                        title,
+                        description,
+                        image,
+                        category,
+                        status,
+                        location
+                    }
+                )
+            }
+
+        )
+
+    } else {
+
+        response = await fetch(
+            `${api}/found/createFoundItem`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(
+                    {
+                        title,
+                        description,
+                        image,
+                        category,
+                        status,
+                        location
+                    }
+                )
+            }
+
+        )
+
+    }
+
+    const result = await response.json();
+
+
+
+    console.log(result);
+
+
+    return result;
+
 
 }

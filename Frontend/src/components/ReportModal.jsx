@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { reportItem } from '../services/api';
 
 function ReportModal({ closeModal }) {
 
@@ -7,6 +8,7 @@ function ReportModal({ closeModal }) {
     const [category, setCategory] = useState("category");
     const [status, setStatus] = useState("");
     const [location, setLocation] = useState("");
+    const [image,setImage] = useState("");
 
 
 
@@ -14,12 +16,19 @@ function ReportModal({ closeModal }) {
 
         e.preventDefault();
 
-        console.log(title);
-        console.log(description);
-        console.log(category);
-        console.log(status);
-        console.log(location);
 
+        async function fetchitem() {
+           
+
+            const data = await reportItem(title, description, category, status, location , image);
+
+            console.log(data);
+
+           
+        }
+
+
+        fetchitem();
 
 
     };
@@ -33,7 +42,7 @@ function ReportModal({ closeModal }) {
                     <h2 className="text-2xl font-bold ">
                         Report Item
                     </h2>
-                    <form  onSubmit={submitHandler}  className="flex flex-col gap-3 mt-6" >
+                    <form onSubmit={submitHandler} className="flex flex-col gap-3 mt-6" >
 
                         <input
                             type="text"
@@ -52,21 +61,21 @@ function ReportModal({ closeModal }) {
 
                         <select className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
                             value={category} onChange={(e) => setCategory(e.target.value)}>
-
+                            <option>Category</option>
                             <option>Electronics</option>
                             <option>Bags</option>
                             <option>Books</option>
                         </select>
 
                         <select className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
-                            value={category} onChange={(e) => setStatus(e.target.value)}>
+                            value={status} onChange={(e) => setStatus(e.target.value)}>
                             <option>Status</option>
                             <option>Lost</option>
                             <option>Found</option>
                         </select>
 
                         <select className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
-                            value={category} onChange={(e) => setLocation(e.target.value)}>
+                            value={location} onChange={(e) => setLocation(e.target.value)}>
                             <option>Location</option>
                             <option>IIPS</option>
                             <option>SCSIT</option>
@@ -82,7 +91,7 @@ function ReportModal({ closeModal }) {
                             type="text"
                             placeholder="Image URL"
                             className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
-                            onChange={(e) => setLocation(e.target.value)}
+                            onChange={(e) => setImage(e.target.value)}
                         />
 
                         <div className="flex justify-end gap-3 mt-4">

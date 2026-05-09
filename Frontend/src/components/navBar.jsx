@@ -2,7 +2,10 @@
 
 
 
-function Navbar(){
+
+function Navbar({openModal}){
+
+    
   
     return (
     
@@ -24,14 +27,16 @@ function Navbar(){
                 <button  className="px-4 py-2 bg-[#E07848]
                           text-white rounded-lg hover:bg-[#c9653a]
                           transition duration-300"
-                           type = "button">Report item
+                           type = "button" onClick={openModal} >Report item
                            </button>
             </div>
         </div>
+
+        
     </nav>
    
     )
 }
 
 
-export default Navbar
+export default Navbar;

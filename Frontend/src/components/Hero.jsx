@@ -1,7 +1,7 @@
 
 
 
-function Hero(){
+function Hero({openModal}){
 
     return (
       <section className="bg-[#0F0E0D] min-h-screen ">
@@ -16,10 +16,10 @@ function Hero(){
                 <div className="flex flex-row gap-4 mt-10">
                     <button className="px-4 py-4 bg-[#E07848]
                           text-white rounded-lg hover:bg-[#c9653a]
-                          transition duration-300" type="button">I lost something</button>
+                          transition duration-300" type="button" onClick={openModal}>I lost something</button>
                     <button className="px-4 py-4 bg-[#E07848]
                           text-white rounded-lg hover:bg-[#c9653a]
-                          transition duration-300" type="button">I found something</button>
+                          transition duration-300" type="button" onClick={openModal}>I found something</button>
                 </div>
               
             </div>

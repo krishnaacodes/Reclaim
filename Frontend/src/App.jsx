@@ -16,7 +16,7 @@ function App() {
   return (
     <>
     <Navbar  openModal={()=>setShowModal(true)}></Navbar>
-    <Hero></Hero>
+    <Hero openModal={()=>setShowModal(true)}></Hero>
     <ItemsSection></ItemsSection>
 
 

@@ -1,8 +1,30 @@
 import ItemCard from "./ItemCard";
+import { getAllFoundItems } from "../services/api";
+import { useEffect, useState } from "react";
 
 
 
 function ItemsSection() {
+
+    const [items, setItems] = useState([]);
+
+
+
+    useEffect(() => {
+
+        async function fetchItems() {
+
+            const data = await getAllFoundItems();
+
+            console.log(data);
+
+            setItems(data);
+        }
+
+        fetchItems();
+
+    }, []);
+
 
     let category = ["Bags & Bagpacks", "Electronics", "Keys & Cards", "Clothing", "Books", "Jewellery", "Other"];
     let locations = ["IIPS", "SCSIT", "ICH", "Canteen", "Temple", "Football Ground"];
@@ -61,14 +83,14 @@ function ItemsSection() {
 
 
 
- 
 
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips"/>
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips"/>
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips"/>
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips"/>
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips"/>
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips"/>
+
+                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
+                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
+                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
+                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
+                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
+                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
 
 
                     </div>

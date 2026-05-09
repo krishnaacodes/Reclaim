@@ -6,9 +6,15 @@ const Router = express.Router();
 
 
 
-Router.get("/getAllFoundItem",authenticateuser,getAllFoundItem);
-Router.post("/createFoundItem",authenticateuser,createFoundItem);
-Router.get("/getAllFoundItemOfUser",authenticateuser,getAllFoundItemOfUser)
-Router.post("/setAsRecovered/:id",authenticateuser,setAsRecovered);
+// Router.get("/getAllFoundItem",authenticateuser,getAllFoundItem);
+// Router.post("/createFoundItem",authenticateuser,createFoundItem);
+// Router.get("/getAllFoundItemOfUser",authenticateuser,getAllFoundItemOfUser)
+// Router.post("/setAsRecovered/:id",authenticateuser,setAsRecovered);
+
+
+Router.get("/getAllFoundItem",getAllFoundItem);
+Router.post("/createFoundItem",createFoundItem);
+Router.get("/getAllFoundItemOfUser",getAllFoundItemOfUser)
+Router.post("/setAsRecovered/:id",setAsRecovered);
 
 export default Router;

@@ -4,13 +4,14 @@ import LostItem from "../models/lost.model.js";
 
 
 const createLostItem = asyncHandler(async (req,res)=>{
+    console.log(req.body);
     const {title,description,category,location,image} = req.body;
 
     if(!title || !description || !category || !location || !image ){
         res.status(400).send("all fields are required");
         return;
     }
-
+    console.log("ma ka bhosda aag")
     const createitem = await LostItem.create({
         title,
         description,
@@ -18,7 +19,7 @@ const createLostItem = asyncHandler(async (req,res)=>{
         location,
         image : image || " ",
         status:"lost",
-        user : req.user._id
+        // user : req.user._id
     })
 
     

@@ -2,56 +2,58 @@ import mongoose from "mongoose";
 
 
 const lostitemSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
-    description:{
-        type:String,
-        required:true
+    description: {
+        type: String,
+        required: true
     },
-    category:{
-        type:String,
-        required:true,
-        enum: ["electronics", "stationary", "shoe_clothing", "others"] 
+    category: {
+        type: String,
+        required: true,
+        enum: ["Bags & Bagpacks", "Electronics", "Keys & Cards", "Clothing", "Books", "Jewellery", "Other"]
     },
-    location:{
-        type:String,
-        required:true
+    location: {
+        type: String,
+        enum: ["IIPS", "SCSIT", "ICH", "Canteen", "Temple", "Football Ground", "Other"],
+
+        required: true
     },
-    latitude:{
-        type:Number,
-        required:false,
-        default:-1
+    latitude: {
+        type: Number,
+        required: false,
+        default: -1
     },
-    longitude:{
-        type:Number,
-        required:false,
-        default:-1
+    longitude: {
+        type: Number,
+        required: false,
+        default: -1
     },
     status: {
-    type: String,
-    enum: ["lost", "recovered"],
-    default: "lost"
-   },
-    date:{
-        type:Date,
-        default:Date.now,
-        
+        type: String,
+        enum: ["lost", "recovered"],
+        default: "lost"
     },
-    image:{
-        type:String, // cloudnary
-        required:true
+    date: {
+        type: Date,
+        default: Date.now,
+
     },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required:true
+    image: {
+        type: String, // cloudnary
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: false
     },
 },
-    {timestamps:true}
+    { timestamps: true }
 )
 
-const LostItem = mongoose.model("LostItem",lostitemSchema);
+const LostItem = mongoose.model("LostItem", lostitemSchema);
 
 export default LostItem;

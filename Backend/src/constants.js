@@ -1,1 +1,1 @@
-export const DB_NAME = "Reclaim";
+export const DB_NAME = "RECLAIM";

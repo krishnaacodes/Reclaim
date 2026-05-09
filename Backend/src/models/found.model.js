@@ -23,11 +23,12 @@ const founditemSchema = new mongoose.Schema({
     category:{
         type:String,
         required:true,
-        enum: ["electronics", "stationary", "shoe_clothing", "others"] 
+        enum: ["Bags & Bagpacks", "Electronics", "Keys & Cards", "Clothing","Books","Jewellery","Other"] 
     },
     location:{
         type:String,
-        required:true
+        required:true,
+        enum:["IIPS","SCSIT","ICH","Canteen","Temple","Football Ground","Other"]
     },
     latitude:{
         type:Number,
@@ -54,7 +55,7 @@ const founditemSchema = new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:true
+        required:false
     },
 },
     {timestamps:true}

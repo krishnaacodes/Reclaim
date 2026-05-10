@@ -26,7 +26,7 @@ function ItemsSection() {
     }, []);
 
 
-    let category = ["Bags&Bagpacks", "Electronics", "Keys & Cards", "Clothing", "Books", "Jewellery", "Other"];
+    let category = ["Bags & Bagpacks", "Electronics", "Keys & Cards", "Clothing", "Books", "Jewellery", "Other"];
     let locations = ["IIPS", "SCSIT", "ICH", "Canteen", "Temple", "Football Ground"];
     let link = "https://imgs.search.brave.com/lcC_TfnW3N9UTFyW4O_g1-7Q5xxfFcMEoHVtJqi9Ix8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vcGljanVt/Ym8uY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy9taW5pbWFsaXN0/LWhlYWRlci1waG90/by13aXRoLXdvbWFu/LXdpdGgtY2xvc2Vk/LWV5ZXMtZnJlZS1p/bWFnZS5qcGVnP3c9/NjAwJnF1YWxpdHk9/ODA";
     return (

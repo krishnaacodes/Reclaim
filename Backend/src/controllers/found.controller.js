@@ -43,9 +43,7 @@ const getAllFoundItem = asyncHandler(async (req,res)=>{
      return;
    }
 
-   res.status(200).json([{
-    allItems:allItem
-   }]);
+   res.status(200).json(allItem);
 
 });
 

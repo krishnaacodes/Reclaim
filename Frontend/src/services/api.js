@@ -15,6 +15,19 @@ export async function getAllLostItems() {
 
 }
 
+export async function getAllItems(){
+    const response1 = await fetch(`${api}/lost/getAllLostItem`);
+    const response2 = await fetch(`${api}/found/getAllFoundItem`);
+
+    const result1 = await response1.json();
+    const result2 = await response2.json();
+
+    const result = [...result1,...result2];
+
+    return result;
+
+}
+
 
 
 export async function reportItem(title, description, category, status, location , image) {

@@ -1,5 +1,5 @@
 import ItemCard from "./ItemCard";
-import { getAllLostItems } from "../services/api";
+import { getAllLostItems , getAllItems } from "../services/api";
 import { useEffect, useState } from "react";
 
 
@@ -14,7 +14,7 @@ function ItemsSection() {
 
         async function fetchItems() {
 
-            const data = await getAllLostItems();
+            const data = await getAllItems();
 
             console.log(data);
 

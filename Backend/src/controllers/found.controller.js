@@ -41,18 +41,17 @@ const getAllFoundItem = asyncHandler(async (req,res)=>{
 
 
    if(!allItem || allItem.length == 0){
-    res.status(200).json({
-        message:"no found items are listed yet!"
-        }
-     )
+    res.status(200).json([])
      return;
    }
 
-   res.status(200).json({
+   res.status(200).json([{
     allItems:allItem
-   })
+   }]);
 
 });
+
+
 
 
 

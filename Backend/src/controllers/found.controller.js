@@ -4,7 +4,7 @@ import asyncHandler from "../utils/asynchandler.js";
 
 
 const createFoundItem = asyncHandler(async (req,res)=>{
-    const {title,description,category,location,image,verificationQuestion,verificationAnswer} = req.body;
+    const {title,description,category,location,image} = req.body;
 
     if(!title || !description || !category || !location || !image){
         res.status(400).send("all fields are required");
@@ -16,11 +16,9 @@ const createFoundItem = asyncHandler(async (req,res)=>{
         description,
         category,
         location,
-        verificationQuestion,
-        verificationAnswer,
         image : image || " ",
         status:"found",
-        user : req.user._id
+        // user : req.user._id
     });
 
     

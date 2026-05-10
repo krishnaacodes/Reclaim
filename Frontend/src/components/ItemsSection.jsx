@@ -10,6 +10,13 @@ function ItemsSection() {
 
 
 
+    const [selectedStatus,setSelectedStatus] = useState("All items");
+    const [selectedCategory,setSelectedCategory] = useState("All category");
+    const [selectedLocation,setSelectedLocation] = useState("All location");
+
+
+    console.log(selectedStatus,selectedCategory,selectedLocation);
+
     useEffect(() => {
 
         async function fetchItems() {
@@ -37,18 +44,21 @@ function ItemsSection() {
                     <div className="flex flex-col gap-3 pt-1">
                         <p className=" text-gray-500 uppercase tracking-wide">STATUS</p>
                         <div className="flex flex-col gap-2 mt-3 px-3">
-                            <span>All items</span>
-                            <span>Lost</span>
-                            <span>Found</span>
+                            <span onClick={()=>setSelectedStatus("All items")}>All items</span>
+                            <span onClick={()=>setSelectedStatus("Lost")}>Lost</span>
+                            <span onClick={()=>setSelectedStatus("Found")}>Found</span>
                         </div>
                     </div>
                     <div className="flex flex-col gap-1 pt-5">
                         <p className="text-gray-500 uppercase tracking-wide"> CATEGORY</p>
                         <div className="flex flex-col gap-1 mt-3 px-3">
+                            
+                            <span onClick={()=>setSelectedLocation("All category")}>All category</span>
                             {
+                                
                                 category.map((e) => {
                                     return (
-                                        <span>{e}</span>
+                                        <span onClick={()=>setSelectedCategory(e)}>{e}</span>
                                     )
                                 })
                             }
@@ -57,11 +67,13 @@ function ItemsSection() {
                     <div className="flex flex-col gap-1 pt-5">
                         <p className="text-gray-500 uppercase tracking-wide">LOCATION</p>
                         <div className="flex flex-col gap-1 mt-3 px-3">
+
+                            <span onClick={()=>setSelectedCategory("All location")}>All location</span>
                             {
 
                                 locations.map((e) => {
                                     return (
-                                        <span>{e}</span>
+                                        <span onClick={()=>setSelectedLocation(e)}>{e}</span>
                                     )
                                 })
 

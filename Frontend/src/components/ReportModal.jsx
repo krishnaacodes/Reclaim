@@ -3,12 +3,15 @@ import { reportItem } from '../services/api';
 
 function ReportModal({ closeModal }) {
 
+        let link = "https://imgs.search.brave.com/lcC_TfnW3N9UTFyW4O_g1-7Q5xxfFcMEoHVtJqi9Ix8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vcGljanVt/Ym8uY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy9taW5pbWFsaXN0/LWhlYWRlci1waG90/by13aXRoLXdvbWFu/LXdpdGgtY2xvc2Vk/LWV5ZXMtZnJlZS1p/bWFnZS5qcGVnP3c9/NjAwJnF1YWxpdHk9/ODA";
+
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("category");
     const [status, setStatus] = useState("");
     const [location, setLocation] = useState("");
-    const [image,setImage] = useState("");
+    const [image, setImage] = useState(link);
 
 
 
@@ -18,17 +21,20 @@ function ReportModal({ closeModal }) {
 
 
         async function fetchitem() {
-           
 
-            const data = await reportItem(title, description, category, status, location , image);
+            const data = await reportItem(title, description,  category,status, location, image);
 
             console.log(data);
+            window.location.reload();
 
-           
         }
 
 
         fetchitem();
+
+        
+        
+   
 
 
     };
@@ -63,16 +69,11 @@ function ReportModal({ closeModal }) {
                             value={category} onChange={(e) => setCategory(e.target.value)}>
                             <option>Category</option>
                             <option>Electronics</option>
-                            <option>Bags</option>
+                            <option>Bags & Bagpacks</option>
                             <option>Books</option>
                         </select>
 
-                        <select className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
-                            value={status} onChange={(e) => setStatus(e.target.value)}>
-                            <option>Status</option>
-                            <option>Lost</option>
-                            <option>Found</option>
-                        </select>
+
 
                         <select className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
                             value={location} onChange={(e) => setLocation(e.target.value)}>
@@ -83,6 +84,13 @@ function ReportModal({ closeModal }) {
                             <option>Canteen</option>
                             <option>Temple</option>
                             <option>Football Ground</option>
+                        </select>
+
+                        <select className="w-full px-4 py-3 rounded-lg bg-[#2A2928] outline-none"
+                            value={status} onChange={(e) => setStatus(e.target.value)}>
+                            <option>Status</option>
+                            <option>Lost</option>
+                            <option>Found</option>
                         </select>
 
 

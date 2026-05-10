@@ -1,5 +1,5 @@
 import ItemCard from "./ItemCard";
-import { getAllFoundItems } from "../services/api";
+import { getAllLostItems } from "../services/api";
 import { useEffect, useState } from "react";
 
 
@@ -14,7 +14,7 @@ function ItemsSection() {
 
         async function fetchItems() {
 
-            const data = await getAllFoundItems();
+            const data = await getAllLostItems();
 
             console.log(data);
 
@@ -26,7 +26,7 @@ function ItemsSection() {
     }, []);
 
 
-    let category = ["Bags & Bagpacks", "Electronics", "Keys & Cards", "Clothing", "Books", "Jewellery", "Other"];
+    let category = ["Bags&Bagpacks", "Electronics", "Keys & Cards", "Clothing", "Books", "Jewellery", "Other"];
     let locations = ["IIPS", "SCSIT", "ICH", "Canteen", "Temple", "Football Ground"];
     let link = "https://imgs.search.brave.com/lcC_TfnW3N9UTFyW4O_g1-7Q5xxfFcMEoHVtJqi9Ix8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vcGljanVt/Ym8uY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy9taW5pbWFsaXN0/LWhlYWRlci1waG90/by13aXRoLXdvbWFu/LXdpdGgtY2xvc2Vk/LWV5ZXMtZnJlZS1p/bWFnZS5qcGVnP3c9/NjAwJnF1YWxpdHk9/ODA";
     return (
@@ -85,13 +85,26 @@ function ItemsSection() {
 
 
 
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
-                        <ItemCard image={link} category="electronics" title="smart watch" description="a black smart watch" location="iips" />
+                        {
 
+                            items.length > 0 ? (items.map((item, index) => {
+
+                                return (
+
+                                    <ItemCard
+                                        key={index}
+                                        title={item.title}
+                                        description={item.description}
+                                        category={item.category}
+                                        location={item.location}
+                                        image={item.image}
+                                    />
+
+                                )
+                            })) : (
+                                 <p>No items found</p>
+                            )
+                        }
 
                     </div>
 

@@ -3,9 +3,9 @@ const api = "http://localhost:3000/api/v1";
 
 
 
-export async function getAllFoundItems() {
+export async function getAllLostItems() {
 
-    const response = await fetch(`${api}/found/getAllFoundItem`);
+    const response = await fetch(`${api}/lost/getAllLostItem`);
 
     const result = await response.json();
 
@@ -21,6 +21,9 @@ export async function reportItem(title, description, category, status, location 
 
 
     let response = "";
+
+    
+            
 
     if (status.toLowerCase() === "lost") {
 

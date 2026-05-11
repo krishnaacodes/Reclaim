@@ -1,5 +1,5 @@
 import ItemCard from "./ItemCard";
-import { getAllLostItems , getAllItems } from "../services/api";
+import { getAllLostItems, getAllItems } from "../services/api";
 import { useEffect, useState } from "react";
 
 
@@ -10,12 +10,34 @@ function ItemsSection() {
 
 
 
-    const [selectedStatus,setSelectedStatus] = useState("All items");
-    const [selectedCategory,setSelectedCategory] = useState("All category");
-    const [selectedLocation,setSelectedLocation] = useState("All location");
+    const [selectedStatus, setSelectedStatus] = useState("All items");
+    const [selectedCategory, setSelectedCategory] = useState("All category");
+    const [selectedLocation, setSelectedLocation] = useState("All location");
 
 
-    console.log(selectedStatus,selectedCategory,selectedLocation);
+
+    const filteredItems = items.filter((item) => {
+
+        const categoryMatch =
+            selectedCategory === "All category" ||
+            item.category === selectedCategory;
+
+        const locationMatch =
+            selectedLocation === "All location" ||
+            item.location === selectedLocation;
+
+        const statusMatch =
+            selectedStatus === "All items" ||
+            item.status === selectedStatus;
+
+        return categoryMatch && locationMatch && statusMatch;
+    });
+
+
+
+
+
+
 
     useEffect(() => {
 
@@ -23,9 +45,11 @@ function ItemsSection() {
 
             const data = await getAllItems();
 
-            console.log(data);
 
+            console.log(data);
             setItems(data);
+
+
         }
 
         fetchItems();
@@ -44,21 +68,45 @@ function ItemsSection() {
                     <div className="flex flex-col gap-3 pt-1">
                         <p className=" text-gray-500 uppercase tracking-wide">STATUS</p>
                         <div className="flex flex-col gap-2 mt-3 px-3">
-                            <span onClick={()=>setSelectedStatus("All items")}>All items</span>
-                            <span onClick={()=>setSelectedStatus("Lost")}>Lost</span>
-                            <span onClick={()=>setSelectedStatus("Found")}>Found</span>
+                            <span onClick={() => setSelectedStatus("All items")} className={
+                                                selectedStatus === "All items"
+                                                    ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+                                                    : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+                                            }>All items</span>
+                            <span onClick={() => setSelectedStatus("lost")}className={
+                                                selectedStatus === "lost"
+                                                    ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+                                                    : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+                                            }>Lost</span>
+                            <span onClick={() => setSelectedStatus("found")}
+                                className={
+                                                selectedStatus === "found"
+                                                    ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+                                                    : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+                                            }>Found</span>
                         </div>
                     </div>
                     <div className="flex flex-col gap-1 pt-5">
                         <p className="text-gray-500 uppercase tracking-wide"> CATEGORY</p>
                         <div className="flex flex-col gap-1 mt-3 px-3">
-                            
-                            <span onClick={()=>setSelectedLocation("All category")}>All category</span>
+
+                            <span onClick={() => setSelectedCategory("All category")}
+                                   className={
+      selectedCategory === "All category"
+      ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+      : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+   }
+>All category</span>
                             {
-                                
+
                                 category.map((e) => {
                                     return (
-                                        <span onClick={()=>setSelectedCategory(e)}>{e}</span>
+                                        <span onClick={() => setSelectedCategory(e)}
+                                            className={
+                                                selectedCategory === e
+                                                    ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+                                                    : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+                                            }>{e}</span>
                                     )
                                 })
                             }
@@ -68,12 +116,22 @@ function ItemsSection() {
                         <p className="text-gray-500 uppercase tracking-wide">LOCATION</p>
                         <div className="flex flex-col gap-1 mt-3 px-3">
 
-                            <span onClick={()=>setSelectedCategory("All location")}>All location</span>
+                            <span onClick={() => setSelectedLocation("All location")}   className={
+      selectedLocation === "All location"
+      ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+      : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+   }
+>All location</span>
                             {
 
                                 locations.map((e) => {
                                     return (
-                                        <span onClick={()=>setSelectedLocation(e)}>{e}</span>
+                                        <span onClick={() => setSelectedLocation(e)}
+                                            className={
+                                                selectedLocation  === e
+                                                    ? "bg-orange-500 text-white px-3 py-1 rounded-lg cursor-pointer transition-all duration-200"
+                                                    : "text-gray-400 px-3 py-1 cursor-pointer hover:text-white transition-all duration-200"
+                                            }>{e}</span>
                                     )
                                 })
 
@@ -99,7 +157,7 @@ function ItemsSection() {
 
                         {
 
-                            items.length > 0 ? (items.map((item, index) => {
+                            filteredItems.length > 0 ? (filteredItems.map((item, index) => {
 
                                 return (
 
@@ -114,7 +172,7 @@ function ItemsSection() {
 
                                 )
                             })) : (
-                                 <p>No items found</p>
+                                <p>No items found</p>
                             )
                         }
 
